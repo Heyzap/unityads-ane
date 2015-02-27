@@ -1,0 +1,5 @@
+<platform xmlns="http://ns.adobe.com/air/extension/4.0">
+    <packagedDependencies> 
+            <packagedDependency>unity-ads.jar</packagedDependency> 
+    </packagedDependencies> 
+</platform>
