@@ -4,6 +4,7 @@ A thin wrapper around the [Unity Ads](https://unityads.unity3d.com/) Android and
 
 The latest release can be found in [Releases](https://github.com/Heyzap/unityads-ane/releases).
 
+Pull requests and issues are welcome.
 
 #### Adding to your project
 
