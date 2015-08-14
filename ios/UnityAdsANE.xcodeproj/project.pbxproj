@@ -10,6 +10,9 @@
 		861D2AF91A9439B3001F1C22 /* UnityAdsANE.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 861D2AF81A9439B3001F1C22 /* UnityAdsANE.h */; };
 		861D2AFB1A9439B3001F1C22 /* UnityAdsANE.m in Sources */ = {isa = PBXBuildFile; fileRef = 861D2AFA1A9439B3001F1C22 /* UnityAdsANE.m */; };
 		861D2B011A9439B3001F1C22 /* libUnityAdsANE.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 861D2AF51A9439B3001F1C22 /* libUnityAdsANE.a */; };
+		8AAF89181B7E6E66001D78D4 /* UnityAds.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8AAF89161B7E6E66001D78D4 /* UnityAds.bundle */; };
+		8AAF89191B7E6E66001D78D4 /* UnityAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AAF89171B7E6E66001D78D4 /* UnityAds.framework */; };
+		8AAF891A1B7E6E66001D78D4 /* UnityAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AAF89171B7E6E66001D78D4 /* UnityAds.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,7 +44,9 @@
 		861D2AFA1A9439B3001F1C22 /* UnityAdsANE.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnityAdsANE.m; sourceTree = "<group>"; };
 		861D2B001A9439B3001F1C22 /* UnityAdsANETests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnityAdsANETests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		861D2B061A9439B3001F1C22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		861D2B101A9439F2001F1C22 /* FlashRuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashRuntimeExtensions.h; sourceTree = "<group>"; };
+		8AAF89161B7E6E66001D78D4 /* UnityAds.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UnityAds.bundle; sourceTree = "<group>"; };
+		8AAF89171B7E6E66001D78D4 /* UnityAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UnityAds.framework; sourceTree = "<group>"; };
+		8AAF891B1B7E9AC7001D78D4 /* FlashRuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashRuntimeExtensions.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AAF89191B7E6E66001D78D4 /* UnityAds.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,6 +63,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				861D2B011A9439B3001F1C22 /* libUnityAdsANE.a in Frameworks */,
+				8AAF891A1B7E6E66001D78D4 /* UnityAds.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,7 +73,8 @@
 		861D2AEC1A9439B3001F1C22 = {
 			isa = PBXGroup;
 			children = (
-				861D2B0F1A9439E8001F1C22 /* Vendor */,
+				8AAF891B1B7E9AC7001D78D4 /* FlashRuntimeExtensions.h */,
+				8AAF89141B7E6E66001D78D4 /* Vendor */,
 				861D2AF71A9439B3001F1C22 /* UnityAdsANE */,
 				861D2B041A9439B3001F1C22 /* UnityAdsANETests */,
 				861D2AF61A9439B3001F1C22 /* Products */,
@@ -107,12 +115,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		861D2B0F1A9439E8001F1C22 /* Vendor */ = {
+		8AAF89141B7E6E66001D78D4 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				861D2B101A9439F2001F1C22 /* FlashRuntimeExtensions.h */,
+				8AAF89161B7E6E66001D78D4 /* UnityAds.bundle */,
+				8AAF89171B7E6E66001D78D4 /* UnityAds.framework */,
 			);
-			name = Vendor;
+			path = Vendor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +202,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AAF89181B7E6E66001D78D4 /* UnityAds.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +312,11 @@
 		861D2B0A1A9439B3001F1C22 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/karim/projects/facebook-audience-network-ane/ios/Vendor",
+					"$(PROJECT_DIR)/Vendor",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -311,6 +326,11 @@
 		861D2B0B1A9439B3001F1C22 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/karim/projects/facebook-audience-network-ane/ios/Vendor",
+					"$(PROJECT_DIR)/Vendor",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -323,6 +343,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"/Users/karim/projects/facebook-audience-network-ane/ios/Vendor",
+					"$(PROJECT_DIR)/Vendor",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -340,6 +362,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"/Users/karim/projects/facebook-audience-network-ane/ios/Vendor",
+					"$(PROJECT_DIR)/Vendor",
 				);
 				INFOPLIST_FILE = UnityAdsANETests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -366,6 +390,7 @@
 				861D2B0B1A9439B3001F1C22 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		861D2B0C1A9439B3001F1C22 /* Build configuration list for PBXNativeTarget "UnityAdsANETests" */ = {
 			isa = XCConfigurationList;
@@ -374,6 +399,7 @@
 				861D2B0E1A9439B3001F1C22 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
