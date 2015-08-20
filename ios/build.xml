@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Unity Ads ANE iOS Build Script" default="all">
+
+    <record name="build.log" loglevel="verbose" action="start" />
+
+    <!-- Config File -->
+    <property file="build.config"/>
+    
+    <target name="build" description="Build iOS Library">
+        
+        <!-- Clean XCode Project -->
+        <exec executable="xcodebuild" failonerror="true">
+            <arg line="-project ${project.name}.xcodeproj"/>
+            <arg line="-alltargets clean"/>
+        </exec>
+        
+        <!-- Build XCode project -->
+        <exec executable="xcodebuild" failonerror="true">
+            <arg line="-project ${project.name}.xcodeproj"/>
+            <arg line="-target ${project.name}"/>
+            <arg line="-configuration Release"/>
+        </exec>
+        
+        <mkdir dir="${output.dir}" />
+        
+        <!-- Copy over files to iOS output directory -->
+        <copy todir="${output.dir}" >
+
+            <!-- Copy over any extra libs needed - they better be mentioned in the platform.xml! -->
+            <fileset dir="${lib.dir}" includes="**" />
+
+            <!-- Copy over platform.xml -->
+            <file file="platform.xml" />
+
+            <!-- Copy over library (.a file)-->
+            <file file="${build.dir}/Release-iphoneos/${output.name}" />
+        </copy>
+    </target>
+
+    <target name="all" depends="clean, build" />
+
+    <target name="clean">
+        <delete dir="${build.dir}" />
+        <delete dir="${output.dir}" />
+        <delete file="build.log" />
+    </target>
+    
+</project>

@@ -6,143 +6,52 @@
     <!-- Config File -->
     <property file="build.config"/>
 
-    <property name="build.dir" value="./build" />
-    <property name="output.dir" value="./bin" />
-    
-    <macrodef name="ios-build" description="Build iOS Library">
-        <sequential>
-            <mkdir dir="${build.dir}/ios/"/>
-            
-            <!-- Clean XCode Project -->
-            <exec executable="xcodebuild" failonerror="true" dir="${ios.dir}">
-                <arg line="-project ${ios.project.name}.xcodeproj"/>
-                <arg line="-alltargets clean"/>
-            </exec>
-            
-            <!-- Build XCode project -->
-            <exec executable="xcodebuild" failonerror="true" dir="${ios.dir}">
-                <arg line="-project ${ios.project.name}.xcodeproj"/>
-                <arg line="-target ${ios.project.name}"/>
-                <arg line="-configuration Release"/>
-            </exec>
-            
-            <!-- Copy over files to iOS build directory -->
-            <copy todir="${build.dir}/ios" >
-                <!-- Copy over any extra libs needed - they better be mentioned in the platform.xml! -->
-                <fileset dir="${ios.dir}/${ios.lib.dir}" includes="**"/> 
+    <macrodef name="platforms" description="Run Ant on all Platforms">
+        <attribute name="target" default="all"/>
 
-                <!-- Copy over library (.a file)-->
-                <file file="${ios.dir}/build/Release-iphoneos/${ios.output.name}"/>  
-            </copy>
+        <sequential>
+            <subant inheritall="false" target="@{target}">
+                <property name="output.dir" value="${output.dir}" />
+                <property name="air.sdk" value="${air.sdk}" />
+                <fileset dir="." includes="*/build.xml"/>
+            </subant>
         </sequential>
     </macrodef>
 
-    <macrodef name="android-build" description="Build Android Library">
-        <sequential>
-            <mkdir dir="${build.dir}/android/"/>
-            <mkdir dir="${build.dir}/android/classes"/>
-            
-            <!-- Classpaths for external libraries in android lib directory -->
-            <path id="android.classpath">
-                <fileset dir="${android.dir}/${android.lib.dir}" casesensitive="yes">
-                    <include name="**/*.jar"/>
-                </fileset>
-            </path>
-            
-            <!-- Compile all Java classes in android source directory -->
-            <javac
-                srcdir="${android.dir}/${android.src.dir}"
-                destdir="${build.dir}/android/classes"
-                target="1.6"
-                source="1.6"
-                includeantruntime="false"
-                failonerror="true">
+    <target name="build" description="Build on all platforms.">
+        <platforms target="build"/>
+    </target>
 
-                <classpath refid="android.classpath"/>
-            </javac>
-            
-            <!-- Package compile class files into jar -->
-            <jar jarfile="${build.dir}/android/${android.output.name}" basedir="${build.dir}/android/classes" />
-            
-            <!-- Clean up compile class files -->
-            <delete dir="${build.dir}/android/classes/"/>
+    <target name="package" depends="build" description="Package ANE">
+        <mkdir dir="${output.dir}/" />
 
-            <!-- Copy over any extra libs needed - they better be mentioned in the platform.xml! -->
-            <copy todir="${build.dir}/android" failonerror="true">
-                <path refid="android.classpath" />
-            </copy>
-        </sequential>
-    </macrodef>
+        <!-- Copy over library.swf to each platform output -->
+        <copy file="${actionscript.dir}/${output.dir}/library.swf" todir="${ios.dir}/${output.dir}" failonerror="true" />
+        <copy file="${actionscript.dir}/${output.dir}/library.swf" todir="${android.dir}/${output.dir}" failonerror="true" />
+        <copy file="${actionscript.dir}/${output.dir}/library.swf" todir="${actionscript.dir}/${output.dir}/default" failonerror="true" />
 
-    <macrodef name="swc-build" description="Build SWC Library">
-        <sequential>
-            <mkdir dir="${build.dir}/swc/"/>
-            <mkdir dir="${build.dir}/default/"/>
-            
-            <!-- Get path of all actionscript classes -->
-            <fileset dir="${actionscript.dir}/${actionscript.src.dir}" casesensitive="yes" id="classfiles">
-                <include name="**/*.as"/>
-            </fileset>
-            
-            <!-- Convert class paths to class IDs  -->
-            <pathconvert property="actionscript.classlist" refid="classfiles" pathsep=" " dirsep=".">
-                <regexpmapper from=".*src.(.*)\.as" to="\1"/>
-            </pathconvert>
-            
-            <!-- Compile create .swc -->
-            <exec executable="${air.sdk}/bin/compc" failonerror="true">
-                <arg line='-source-path ${actionscript.dir}/${actionscript.src.dir}'/>
-                <arg line='-output ${build.dir}/swc/actionscript.swc'/>
-                <arg line='-swf-version=14'/>
-                <arg line='-external-library-path+="${air.sdk}/frameworks/libs/air/airglobal.swc"'/>
-                <arg line='-include-classes ${actionscript.classlist}'/>
-            </exec>
-            
-            <!-- Unzip packaged .swc and copy over the library.swf inside to the individual platform build directories -->
-            <unzip src="${build.dir}/swc/actionscript.swc" dest="${build.dir}/swc/content" overwrite="true"/>
-            <copy file="${build.dir}/swc/content/library.swf" todir="${build.dir}/ios" overwrite="true"/>
-            <copy file="${build.dir}/swc/content/library.swf" todir="${build.dir}/android" overwrite="true"/>
-            <copy file="${build.dir}/swc/content/library.swf" todir="${build.dir}/default" overwrite="true"/>
-            <delete dir="${build.dir}/swc/content/"/>
-
-        </sequential>
-    </macrodef>
-
-    <macrodef name="package-build" description="Package the ANE">
-        <sequential>
-            <mkdir dir="${output.dir}/"/>
-            
-            <!-- Compile ANE -->
-            <exec executable="${air.sdk}/bin/adt" failonerror="true" dir="./">
-                <arg value="-package"/>
-                <arg value="-target"/>
-                <arg value="ane"/>
-                <arg value="${output.dir}/${output.name}.ane"/>
-                <arg value="extension.xml"/>
-                <arg line="-swc ${build.dir}/swc/actionscript.swc"/>
-                <arg line="-platform iPhone-ARM -platformoptions ${ios.dir}/platform.xml -C ${build.dir}/ios ."/>
-                <arg line="-platform Android-ARM -platformoptions ${android.dir}/platform.xml -C ${build.dir}/android ."/>
-                <arg line="-platform default -C ${build.dir}/default/ ."/>
-            </exec>
-
-        </sequential>
-    </macrodef>
-
-    <target name="all" depends="clean,package" />
+        <!-- Compile ANE -->
+        <exec executable="${air.sdk}/bin/adt" failonerror="true">
+            <arg value="-package"/>
+            <arg value="-target"/>
+            <arg value="ane"/>
+            <arg value="${output.dir}/${output.name}"/>
+            <arg value="extension.xml"/>
+            <arg line="-swc ${actionscript.dir}/${output.dir}/actionscript.swc"/>
+            <arg line="-platform iPhone-ARM -C ${ios.dir}/${output.dir} ."/>
+            <arg line="-platform Android-ARM -C ${android.dir}/${output.dir} ."/>
+            <arg line="-platform default -C ${actionscript.dir}/${output.dir}/default ."/>
+        </exec>
+    </target>    
 
     <target name="clean">
-        <delete dir="${build.dir}" />
         <delete dir="${output.dir}" />
-        <delete dir="${ios.dir}/build" />
+        <delete file="build.log" />
+        
+        <!-- Run clean on all other platforms -->
+        <platforms target="clean" />
     </target>
 
-    <target name="package" description="Building Unity Ads ANE">
-        <mkdir dir="${build.dir}" />
-
-        <ios-build />
-        <android-build />
-        <swc-build />
-        <package-build />
-    </target>
+    <target name="all" depends="clean, package" />
     
 </project>

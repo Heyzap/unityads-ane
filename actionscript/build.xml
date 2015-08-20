@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Unity Ads ANE Actionscript Build Script" default="all">
+
+    <record name="build.log" loglevel="verbose" action="start" />
+
+    <!-- Config File -->
+    <property file="build.config"/>
+    
+    <target name="build" description="Build Actionscript Library">
+        <!-- Get path of all actionscript classes -->
+        <fileset dir="${src.dir}" casesensitive="yes" id="classfiles">
+            <include name="**/*.as"/>
+        </fileset>
+        
+        <!-- Convert class paths to class IDs  -->
+        <pathconvert property="classlist" refid="classfiles" pathsep=" " dirsep=".">
+            <regexpmapper from=".*src.(.*)\.as" to="\1"/>
+        </pathconvert>
+
+        <mkdir dir="${build.dir}"/>
+        
+        <!-- Compile create .swc -->
+        <exec executable="${air.sdk}/bin/compc" failonerror="true">
+            <arg line='-source-path ${src.dir}'/>
+            <arg line='-output ${build.dir}/actionscript.swc'/>
+            <arg line='-swf-version=14'/>
+            <arg line='-external-library-path+="${air.sdk}/frameworks/libs/air/airglobal.swc"'/>
+            <arg line='-include-classes ${classlist}'/>
+        </exec>
+        
+        <mkdir dir="${build.dir}/content"/>
+
+        <!-- Unzip packaged .swc and copy over the library.swf -->
+        <unzip src="${build.dir}/actionscript.swc" dest="${build.dir}/content" overwrite="true"/>
+        
+        <mkdir dir="${output.dir}"/>
+        <mkdir dir="${output.dir}/default"/>
+
+        <!-- Copy over files to ActionScript output directory -->
+        <copy todir="${output.dir}" failonerror="true">
+
+            <!-- Copy over compile .swc -->
+            <file file="${build.dir}/actionscript.swc" />
+
+            <!-- copy over library.swf from extracted swc -->
+            <file file="${build.dir}/content/library.swf" />
+
+        </copy>
+    </target>
+
+    <target name="clean">
+        <delete dir="${build.dir}" />
+        <delete dir="${output.dir}" />
+        <delete file="build.log" />
+    </target>
+
+    <target name="all" depends="clean, build" />
+    
+</project>
