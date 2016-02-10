@@ -4,4 +4,11 @@
         <packagedDependency>unityads.jar</packagedDependency>
     </packagedDependencies>
     
+
+    <packagedResources> 
+  <packagedResource> 
+        <packageName>com.heyzap.sdk.extensions.unityads</packageName> 
+        <folderName>res</folderName> 
+    </packagedResource> 
+ </packagedResources> 
 </platform>

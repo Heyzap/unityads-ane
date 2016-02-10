@@ -44,6 +44,10 @@ Pull requests and issues are welcome.
 
 After making the necessary modifications, build the new ANE by following the [building](#building) instructions below.
 
+New versions of Unity Ads contain new .AAR archive. Just unpack it as zip file and add classes.jar file to `android/libs` directory. Rename it to `unityads.jar`.
+
+Copy all resources to `src-resources` folder. They will be automatically added to the build.
+
 #### Building
 
 ##### Requirements:
