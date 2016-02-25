@@ -7,8 +7,8 @@
 
     <packagedResources> 
   <packagedResource> 
-        <packageName>com.heyzap.sdk.extensions.unityads</packageName> 
-        <folderName>res</folderName> 
+        <packageName>com.unity3d.ads.android</packageName> 
+        <folderName>unityads-res</folderName> 
     </packagedResource> 
  </packagedResources> 
 </platform>
