@@ -57,6 +57,7 @@ Copy all resources to `src-resources` folder. They will be automatically added t
 - [AIR SDK](http://www.adobe.com/devnet/air/air-sdk-download.html)
 
 ##### Building:
+- Make `build.config` file from `build.config.dist` ( local config file)
 - Add the path to your AIR SDK in `build.config` (under `air.sdk`)
 - From the root of the repository, run `ant`.
 
