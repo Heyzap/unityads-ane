@@ -57,8 +57,8 @@ Copy all resources to `src-resources` folder. They will be automatically added t
 - [AIR SDK](http://www.adobe.com/devnet/air/air-sdk-download.html)
 
 ##### Building:
-- Make `build.config` file from `build.config.dist` ( local config file)
-- Add the path to your AIR SDK in `build.config` (under `air.sdk`)
+- Make a `build.config` by copying `build.config.dist` (your local config file)
+- Change the path to the AIR SDK in `build.config` (named `air.sdk`)
 - From the root of the repository, run `ant`.
 
 After build completes, the native extension will be in `bin/UnityAds.ane`.
