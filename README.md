@@ -44,6 +44,10 @@ Pull requests and issues are welcome.
 
 After making the necessary modifications, build the new ANE by following the [building](#building) instructions below.
 
+New versions of Unity Ads contain new .AAR archive. Just unpack it as zip file and add classes.jar file to `android/libs` directory. Rename it to `unityads.jar`.
+
+Copy all resources to `src-resources` folder. They will be automatically added to the build.
+
 #### Building
 
 ##### Requirements:
@@ -53,6 +57,7 @@ After making the necessary modifications, build the new ANE by following the [bu
 - [AIR SDK](http://www.adobe.com/devnet/air/air-sdk-download.html)
 
 ##### Building:
+- Make `build.config` file from `build.config.dist` ( local config file)
 - Add the path to your AIR SDK in `build.config` (under `air.sdk`)
 - From the root of the repository, run `ant`.
 

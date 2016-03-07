@@ -39,6 +39,10 @@
             <!-- Copy over any extra libs needed - they better be mentioned in the platform.xml! -->
             <path refid="classpath" />
 
+            <!-- Copy all resources from resources folder -->
+            <fileset dir="${resources.dir}" />
+
+
             <!-- Copy over platform.xml -->
             <file file="platform.xml" />
 
