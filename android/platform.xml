@@ -2,10 +2,4 @@
     <packagedDependencies>
         <packagedDependency>unityads.jar</packagedDependency>
     </packagedDependencies>
-    <packagedResources>
-        <packagedResource>
-            <packageName>com.unity3d.ads.android</packageName>
-            <folderName>unityads-res</folderName>
-        </packagedResource>
-    </packagedResources>
 </platform>

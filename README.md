@@ -7,8 +7,8 @@ The latest release can be found in [Releases](https://github.com/Heyzap/unityads
 Pull requests and issues are welcome.
 
 #### Unity Ads Versions
-- iOS: 1.5.8
-- Android: 1.5.8
+- iOS: 2.0.5
+- Android: 2.0.5
 
 #### Adding to your project
 
@@ -18,11 +18,14 @@ Pull requests and issues are welcome.
 	```xml
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	```
 
 	```xml
-	<activity android:name="com.unity3d.ads.android.view.UnityAdsFullscreenActivity" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:hardwareAccelerated="true" />
+	<activity android:name="com.unity3d.ads.adunit.AdUnitActivity" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:hardwareAccelerated="true"
+	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+
+	<activity android:name="com.unity3d.ads.adunit.AdUnitSoftwareActivity" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:hardwareAccelerated="false"
+	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
 	```
 
 - If not done automatically, add the follow extension context to your application descriptor:

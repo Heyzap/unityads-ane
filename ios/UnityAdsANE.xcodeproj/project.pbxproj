@@ -10,7 +10,6 @@
 		861D2AF91A9439B3001F1C22 /* UnityAdsANE.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 861D2AF81A9439B3001F1C22 /* UnityAdsANE.h */; };
 		861D2AFB1A9439B3001F1C22 /* UnityAdsANE.m in Sources */ = {isa = PBXBuildFile; fileRef = 861D2AFA1A9439B3001F1C22 /* UnityAdsANE.m */; };
 		861D2B011A9439B3001F1C22 /* libUnityAdsANE.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 861D2AF51A9439B3001F1C22 /* libUnityAdsANE.a */; };
-		8AAF89181B7E6E66001D78D4 /* UnityAds.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8AAF89161B7E6E66001D78D4 /* UnityAds.bundle */; };
 		8AAF89191B7E6E66001D78D4 /* UnityAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AAF89171B7E6E66001D78D4 /* UnityAds.framework */; };
 		8AAF891A1B7E6E66001D78D4 /* UnityAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AAF89171B7E6E66001D78D4 /* UnityAds.framework */; };
 /* End PBXBuildFile section */
@@ -44,7 +43,6 @@
 		861D2AFA1A9439B3001F1C22 /* UnityAdsANE.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnityAdsANE.m; sourceTree = "<group>"; };
 		861D2B001A9439B3001F1C22 /* UnityAdsANETests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnityAdsANETests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		861D2B061A9439B3001F1C22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8AAF89161B7E6E66001D78D4 /* UnityAds.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UnityAds.bundle; sourceTree = "<group>"; };
 		8AAF89171B7E6E66001D78D4 /* UnityAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UnityAds.framework; sourceTree = "<group>"; };
 		8AAF891B1B7E9AC7001D78D4 /* FlashRuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashRuntimeExtensions.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,7 +116,6 @@
 		8AAF89141B7E6E66001D78D4 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				8AAF89161B7E6E66001D78D4 /* UnityAds.bundle */,
 				8AAF89171B7E6E66001D78D4 /* UnityAds.framework */,
 			);
 			path = Vendor;
@@ -202,7 +199,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8AAF89181B7E6E66001D78D4 /* UnityAds.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
