@@ -7,8 +7,8 @@ The latest release can be found in [Releases](https://github.com/Heyzap/unityads
 Pull requests and issues are welcome.
 
 #### Unity Ads Versions
-- iOS: 2.0.5
-- Android: 2.0.5
+- iOS: 2.1.0
+- Android: 2.0.8
 
 #### Adding to your project
 
