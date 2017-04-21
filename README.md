@@ -8,7 +8,7 @@ Pull requests and issues are welcome.
 
 #### Unity Ads Versions
 - iOS: 2.1.0
-- Android: 2.0.8
+- Android: 2.1.0
 
 #### Adding to your project
 
